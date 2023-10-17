@@ -17,6 +17,7 @@ interface OnInit {
 export class TableComponent {
   @Input() columnas :any;
   @Input() data:any;
+  @Input() title:any;
   dataSource:any;
   
   ngOnInit() {

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   //url: 'http://bff-common.des.tisal.cl/',
-  url: 'http://129.151.100.239:8084/',
+  url: 'http://localhost:8000',
 
   siteKey: '6LffAusaAAAAAD7B3foP43gzUX52NwagIzWmT6Qh',
   codEmpresa: 2,

@@ -9,7 +9,7 @@ export class BaseService {
     this.url = environment.url;
   }
 
-  get(http: HttpClient, servicio: string, request: any): Observable<any> {
+  get(http: HttpClient, servicio: string, request?: any): Observable<any> {
     const headers = new HttpHeaders();
     const o = { headers: headers };
     return http.get(this.url + servicio, o);
