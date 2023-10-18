@@ -325,9 +325,9 @@
 
 <button mat-button [matMenuTriggerFor]="belowMenu">Historial</button>
 <mat-menu #belowMenu="matMenu" yPosition="below">
-  <button mat-menu-item (click)="grd()">Segundo Prestador</button>
-  <button mat-menu-item (click)="grd()">Ley Urgencia</button>
-  <button mat-menu-item (click)="grd()">Camas GRD</button>
+  <button mat-menu-item (click)="historialSegundoPrestador()">Segundo Prestador</button>
+  <button mat-menu-item (click)="historialLeyUrgencia()">Ley Urgencia</button>
+  <button mat-menu-item (click)="historialCamasGrd()">Camas GRD</button>
 </mat-menu>
 </div>
 
@@ -336,11 +336,18 @@
 </div>
 <div >
   
-  <app-table *ngIf="dataSeguroPrestador != undefined" [columnas]="columnas" [data]="dataSeguroPrestador" [title]="'Segundo Prestador'"></app-table>
-  <app-table *ngIf="dataLeyUrgencia != undefined" [columnas]="columnas" [data]="dataLeyUrgencia" [title]="'Ley Urgencia'"></app-table>
-  <app-table *ngIf="camaGrd != undefined" [columnas]="columnas" [data]="camaGrd" [title]="'Camas GRD'"></app-table>
-  <app-table *ngIf="reclamoLeyUrg != undefined" [columnas]="columnas" [data]="reclamoLeyUrg" [title]="'Reclamos Ley Urgencia'"></app-table>
-  <app-table *ngIf="listaEsperas != undefined" [columnas]="columnas" [data]="listaEsperas" [title]="'Lista Espera'"></app-table>
+  <app-table *ngIf="dataSeguroPrestador != undefined" [columnas]="columnas" [data]="dataSeguroPrestador" [title]="'Mis Casos / Segundo Prestador'"></app-table>
+  <app-table *ngIf="dataLeyUrgencia != undefined" [columnas]="columnas" [data]="dataLeyUrgencia" [title]="'Mis Casos / Ley Urgencia'"></app-table>
+  <app-table *ngIf="camaGrd != undefined" [columnas]="columnas" [data]="camaGrd" [title]="'Mis Casos / Camas GRD'"></app-table>
+  <app-table *ngIf="reclamoLeyUrg != undefined" [columnas]="columnas" [data]="reclamoLeyUrg" [title]="'Mis Casos / Reclamos Ley Urgencia'"></app-table>
+  <app-table *ngIf="listaEsperas != undefined" [columnas]="columnas" [data]="listaEsperas" [title]="'Mis Casos / Lista Espera'"></app-table>
+  
+  <!-- historial -->
+  <app-table *ngIf="dataHistorialSegundoPrest != undefined" [columnas]="columnasHistorialSegundo" [data]="dataHistorialSegundoPrest" [title]="'Historial / Segundo Prestador'"></app-table>
+  <app-table *ngIf="dataHistorialLeyUrgencia != undefined" [columnas]="columnasHistorialLeyUrgencia" [data]="dataHistorialLeyUrgencia" [title]="'Historial / Ley Urgencia'"></app-table>
+  <app-table *ngIf="dataHistorialCamasGrd != undefined" [columnas]="columnasHistorialCamasGrd" [data]="dataHistorialCamasGrd" [title]="'Historial / Ley Urgencia'"></app-table>
+  
+  
   
   </div>
 <router-outlet></router-outlet>

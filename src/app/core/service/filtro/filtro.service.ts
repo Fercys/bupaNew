@@ -22,4 +22,10 @@ export class FiltroService extends BaseService{
     return this.get(this.http, '/obtenerDetalle/'+ idProceso);    
   }
 
+  getObtenerHistorial(idProceso:string): any {
+    console.log(this.urlBack +'ObtenerHistorial/'+ idProceso);
+    
+    return this.get(this.http, '/ObtenerHistorial/'+ idProceso);    
+  }
+
 }
