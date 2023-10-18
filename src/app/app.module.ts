@@ -11,6 +11,7 @@ import { TableComponent } from './shared/tables/table.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    MatInputModule
+    MatInputModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
