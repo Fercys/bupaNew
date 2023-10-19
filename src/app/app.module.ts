@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {OAuthModule} from 'angular-oauth2-oidc';
 import { environment } from 'src/environments/environment';
+import { MatInputModule } from '@angular/material/input';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { environment } from 'src/environments/environment';
         sendAccessToken: true,
       },
     }),
+    MatInputModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

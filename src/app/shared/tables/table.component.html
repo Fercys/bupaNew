@@ -1,5 +1,10 @@
 <button mat-button color="primary" (click)="exportExcel()">Descargar Excel</button>
 <h3>{{title}}</h3>
+
+<mat-form-field>
+    <mat-label>Filtrar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Todas Columnas" #input>
+  </mat-form-field>
 <table mat-table class="mat-elevation-z8" #table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container [matColumnDef]="columna" *ngFor="let columna of columnas;">
         <th mat-header-cell *matHeaderCellDef> {{columna}}</th>

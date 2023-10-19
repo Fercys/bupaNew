@@ -17,7 +17,17 @@ export class AppComponent {
    columnas = ['numero_folio','rut_paciente','nombre_paciente','fecha_de_egreso','dias_estada',
    'tipo_grd','ajuste_tecnologia','monto_facturacion','estado','tipo_paciente','categoria',
    'tipo_de_compra','fecha_ingreso','total_dias_estada','estados','montos_calculados_prestadorcodigo_grd'];
-   
+  
+   columnasHistorialSegundo = ['numero_folio','rut_paciente','nombre_paciente','fecha_atencion','fecha_estab',
+   'fecha_egreso','mod','monto_estabilizacion','monto_postestabilizacion','monto_total','estado','grupo_pago',
+   'estado_grupo','confirmar_acv'];
+
+   columnasHistorialLeyUrgencia = ['numero_folio','rut_paciente','nombre_paciente','problema_salud','intervencion_sanitaria',
+   'estado','dz','monto_total','fecha'];
+
+   columnasHistorialCamasGrd = ['numero_folio','rut_paciente','nombre_paciente','fecha_egreso','dias_estada',
+   'inliers_outliers','ajuste_tecnologia','estado','dz','monto_facturacion'];
+
    dataSeguroPrestador :any;
    dataLeyUrgencia : any;
    camaGrd : any;
@@ -28,6 +38,10 @@ export class AppComponent {
    rol: any;
    extraInfoStatus: any;
    email: any;
+   dataHistorialSegundoPrest:any;
+   dataHistorialLeyUrgencia : any;
+   dataHistorialCamasGrd: any;
+
 
    loading = false;
    constructor(private serviceFiltro:FiltroService,
@@ -85,6 +99,12 @@ export class AppComponent {
       this.camaGrd = undefined;
       this.reclamoLeyUrg = undefined;
       this.listaEsperas = undefined;
+      this.dataHistorialSegundoPrest = undefined;
+      this.dataHistorialLeyUrgencia = undefined;
+      this.dataHistorialCamasGrd = undefined;
+
+
+
 
 
 
@@ -138,6 +158,12 @@ export class AppComponent {
       this.camaGrd = undefined;
       this.reclamoLeyUrg = undefined;
       this.listaEsperas = undefined;
+      this.dataHistorialSegundoPrest = undefined;
+      this.dataHistorialLeyUrgencia = undefined;
+      this.dataHistorialCamasGrd = undefined;
+
+
+
 
 
       let data_aux:any;
@@ -192,6 +218,12 @@ export class AppComponent {
       this.dataLeyUrgencia = undefined;
       this.reclamoLeyUrg = undefined;
       this.listaEsperas = undefined;
+      this.dataHistorialSegundoPrest = undefined;
+      this.dataHistorialLeyUrgencia = undefined;
+      this.dataHistorialCamasGrd = undefined;
+
+
+
 
       let data_aux:any;
      
@@ -245,6 +277,12 @@ export class AppComponent {
       this.dataSeguroPrestador = undefined;
       this.dataLeyUrgencia = undefined;
       this.listaEsperas = undefined;
+      this.dataHistorialSegundoPrest = undefined;
+      this.dataHistorialLeyUrgencia = undefined;
+      this.dataHistorialCamasGrd = undefined;
+
+
+
       let data_aux:any;
      
   
@@ -297,6 +335,11 @@ export class AppComponent {
     async listaEspera(){
       this.dataSeguroPrestador = undefined;
       this.dataLeyUrgencia = undefined;
+      this.dataHistorialSegundoPrest = undefined;
+      this.dataHistorialLeyUrgencia = undefined;
+      this.dataHistorialCamasGrd = undefined;
+
+
       let data_aux:any;
      
   
@@ -346,4 +389,165 @@ export class AppComponent {
 
     }
 
+    //Historial
+
+    async historialSegundoPrestador(){
+      this.dataSeguroPrestador = undefined;
+      this.camaGrd = undefined;
+      this.reclamoLeyUrg = undefined;
+      this.listaEsperas = undefined;
+      this.dataLeyUrgencia = undefined;
+      this.dataHistorialLeyUrgencia = undefined;
+      this.dataHistorialCamasGrd = undefined;
+
+
+      let data_aux:any;
+     
+  
+      this.loading = true;
+      await this.serviceFiltro.getObtenerHistorial('1').toPromise().then(
+        (        response: any) => {
+          console.log(response);
+          console.log(response.HistorialCasos);
+          
+          let segundo = Object.values(response.HistorialCasos.SegundoPrestador);
+            console.log(segundo);
+            this.dataHistorialSegundoPrest = [];
+            segundo.forEach((element:any) => {
+              console.log(element);
+              data_aux= { 
+                  numero_folio: element.numero_folio, 
+                  rut_paciente: element.rut_paciente, 
+                  nombre_paciente: element.nombre_paciente, 
+                  fecha_atencion: element.fecha, 
+                  fecha_estab: element.fecha,
+                  fecha_egreso:element.fecha,
+                  mod:'--',
+                  monto_estabilizacion: element.monto_total,
+                  monto_postestabilizacion: element.monto_total,
+                  monto_total: element.monto_total,
+                  estado: element.estado,
+                  grupo_pago:'--',
+                  estado_grupo:'--',
+                  confirmar_acv: '--'
+                };
+                this.dataHistorialSegundoPrest.push(data_aux);
+            });
+            console.log(this.dataHistorialSegundoPrest);
+            this.loading = false;
+        }      
+       ).catch(
+         () =>{
+           Swal.fire({
+         icon: 'error',
+         title: 'Oops...',
+         text: 'error',
+       })
+         }
+       );
+    }
+
+    //Historial
+
+    async historialLeyUrgencia(){
+      this.dataSeguroPrestador = undefined;
+      this.camaGrd = undefined;
+      this.reclamoLeyUrg = undefined;
+      this.listaEsperas = undefined;
+      this.dataLeyUrgencia = undefined;
+      this.dataHistorialSegundoPrest = undefined;
+      this.dataHistorialCamasGrd = undefined;
+
+
+      let data_aux:any;
+     
+  
+      this.loading = true;
+      await this.serviceFiltro.getObtenerHistorial('3').toPromise().then(
+        (        response: any) => {
+          console.log(response);
+          console.log(response.HistorialCasos);
+          
+          let segundo = Object.values(response.HistorialCasos.LeyDeUrgencia);
+            console.log(segundo);
+            this.dataHistorialLeyUrgencia = [];
+            segundo.forEach((element:any) => {
+              console.log(element);
+              data_aux= { 
+                  numero_folio: element.folio, 
+                  rut_paciente: element.rut_paciente, 
+                  nombre_paciente: element.nombre_paciente, 
+                  problema_salud: '--', 
+                  intervencion_sanitaria: '--',
+                  estado: element.estado,
+                  dz:'--',
+                  monto_total: element.monto_total,
+                  fecha: element.fecha_atencion,
+                };
+                this.dataHistorialLeyUrgencia.push(data_aux);
+            });
+            console.log(this.dataHistorialLeyUrgencia);
+            this.loading = false;
+        }      
+       ).catch(
+         () =>{
+           Swal.fire({
+         icon: 'error',
+         title: 'Oops...',
+         text: 'error',
+       })
+         }
+       );
+    }
+
+    //Historial
+
+    async historialCamasGrd(){
+      this.dataSeguroPrestador = undefined;
+      this.camaGrd = undefined;
+      this.reclamoLeyUrg = undefined;
+      this.listaEsperas = undefined;
+      this.dataLeyUrgencia = undefined;
+      this.dataHistorialSegundoPrest = undefined;
+      let data_aux:any;
+     
+  
+      this.loading = true;
+      await this.serviceFiltro.getObtenerHistorial('9').toPromise().then(
+        (        response: any) => {
+          console.log(response);
+          console.log(response.HistorialCasos);
+          
+          let segundo = Object.values(response.HistorialCasos.CamasGRD);
+            console.log(segundo);
+            this.dataHistorialCamasGrd = [];
+            segundo.forEach((element:any) => {
+              console.log(element);
+              data_aux= { 
+                  numero_folio: element.numero_folio, 
+                  rut_paciente: element.rut_paciente, 
+                  nombre_paciente: element.nombre_paciente, 
+                  fecha_egreso: element.fecha_egreso, 
+                  dias_estada: element.dias_estada,
+                  inliers_outliers: element.inliers_outliers,
+                  ajuste_tecnologia: element.ajuste_tecnologia,
+                  estado: element.estado,
+                  dz: element.dz,
+                  monto_facturacion: element.monto_facturacion,
+                };
+                this.dataHistorialCamasGrd.push(data_aux);
+            });
+            console.log(this.dataHistorialCamasGrd);
+            this.loading = false;
+        }      
+       ).catch(
+         () =>{
+           Swal.fire({
+         icon: 'error',
+         title: 'Oops...',
+         text: 'error',
+       })
+         }
+       );
+    }
 }

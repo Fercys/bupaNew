@@ -29,6 +29,7 @@ export class TableComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  
 
   exportExcel() {
     const workSheet = XLSX.utils.json_to_sheet(this.dataSource.data, {header:[]});
