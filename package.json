@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host aq.dev --port 4200 --ssl --ssl-key C:\\Users\\kibernum\\cert\\aq.dev-key.pem --ssl-cert C:\\Users\\kibernum\\cert\\aq.dev.pem",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^15.0.0",
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
+    "angular-oauth2-oidc": "^15.0.1",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.7.32",
     "tslib": "^2.3.0",

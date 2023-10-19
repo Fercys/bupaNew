@@ -10,6 +10,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { TableComponent } from './shared/tables/table.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {OAuthModule} from 'angular-oauth2-oidc';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,13 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatTableModule,
     MatFormFieldModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: [environment.url],
+        sendAccessToken: true,
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

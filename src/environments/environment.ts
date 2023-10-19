@@ -5,23 +5,25 @@
 export const environment = {
   production: false,
   //url: 'http://bff-common.des.tisal.cl/',
+  //Cambiar a un nonbre mas descriptivo
   url: 'http://localhost:8000',
-
-  siteKey: '6LffAusaAAAAAD7B3foP43gzUX52NwagIzWmT6Qh',
-  codEmpresa: 2,
-  captcha: 'N',
-  codProveedor : '9999',
-  errorCambioPassword : 'Ocurrió un error al realizar el cambio de password. Intente de nuevo realizar la acción o comuníquese con el área de soporte para reportar el problema',
-  exitoCambioPassword : 'Cambio de password realizado exitosamente. Será redirigido a la pantalla principal para realizar el login con la nueva password.',
-  errorUsuarioNoEncontrado : 'Usuario no encontrado!'
+  auth: {
+    requireHttps: true,
+    issuer: 'https://imilaccba2.bupa.cl/sts/his',
+    redirectUri: 'https://aq.dev:4200/index.html',
+    postLogoutRedirectUri: 'https://aq.dev:4200/index.html',
+    clientId: 'fonasa-prestadores-spa',
+    responseType: 'code',
+    strictDiscoveryDocumentValidation: false,
+    //scope: 'openid email profile offline_access fonasa_prestadores',
+    scope: 'openid email profile offline_access',
+    // Bellow this line is new to me.
+    useSilentRefresh: false,
+    showDebugInformation: false,
+    sessionChecksEnabled: false,
+    clearHashAfterLogin: true,
+  }
 };
 
 
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+

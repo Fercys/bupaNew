@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FiltroService } from './core/service/filtro/filtro.service';
 import Swal from 'sweetalert2'
+import { OAuthService } from 'angular-oauth2-oidc';
+import { environment } from 'src/environments/environment';
 
 interface OnInit {
   ngOnInit(): void
@@ -21,14 +23,62 @@ export class AppComponent {
    camaGrd : any;
    reclamoLeyUrg : any;
    listaEsperas : any;
+   extrainfo: any;
+   _userinfo: any;
+   rol: any;
+   extraInfoStatus: any;
+   email: any;
 
    loading = false;
-   constructor(private serviceFiltro:FiltroService) { }
+   constructor(private serviceFiltro:FiltroService,
+               private _oauthService: OAuthService, 
+    ) { }
 
-    ngOnInit() {
+  async ngOnInit() {
+    await this.logIn();
+    this.extrainfo = this._userinfo.extrainfo;
+    this.rol = this._userinfo.extrainfo?.ROL_CODIGO;
 
+    if (this.extrainfo === undefined) {
+      this.extraInfoStatus = 'VOID';
+    } else if (this.extrainfo === null) {
+      this.extraInfoStatus = 'NOT_FOUND';
+    } else {
+      this.extraInfoStatus = 'FOUND';
     }
-    
+
+  }
+
+  // Auth
+  async logIn() {
+    console.log('login')
+    this._oauthService.configure(environment.auth);
+    const _: boolean = await this._oauthService.loadDiscoveryDocumentAndLogin();
+
+    if (!this._oauthService.hasValidAccessToken()) {
+      this._oauthService.initCodeFlow();
+    } else {
+      const claims: any = this._oauthService.getIdentityClaims() as any;
+      const userInfo: any = await this._oauthService.loadUserProfile() as any;
+
+      this.email = userInfo.info.email;
+
+      //await this._userinfo.set(userInfo);
+    }
+
+    this._oauthService.setupAutomaticSilentRefresh({}, 'access_token');
+  }
+
+  async logOut() {
+    // await this.oauthService.logOut()
+    await this._oauthService.revokeTokenAndLogout();
+  }
+
+
+
+
+
+
      async seguroPrestador(){
       let data_aux:any;
       this.dataLeyUrgencia = undefined;
